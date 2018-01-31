@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>vue-add-pull-down</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+</head>
+<body>
+  <header>
+    <h1>vue-add-pull-down</h1>
+  </header>
+  <div id="contents">
+    <BUTTON type="button" @click="addList">追加</BUTTON>
+    <BUTTON type="button" @click="removeList">削除</BUTTON>
+    <item-list v-for="i in numberOfList" :items="srcItems" :key="i"></item-list><br />
+      <script type="text/javascript">
+        Vue.component('item-list', {
+        	template: '<select id="items" name="item"><option v-for="(item, index) in items" :value="item" :key="index">{{ item }}</option></select>',
+        	props: ['items']
+        });
+
+        var app = new Vue({
+          el: '#contents',
+          data: {
+            numberOfList: 1,
+            srcItems: ['item1', 'item2', 'item3']
+          },
+          methods: {
+            addList: function () {
+              this.numberOfList++;
+            },
+            removeList: function () {
+              this.numberOfList = this.numberOfList !== 1 ? this.numberOfList - 1 : this.numberOfList;
+            }
+          }
+        });
+    </script>
+  </div>
+</body>
+</html>
